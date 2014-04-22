@@ -40,3 +40,22 @@ produce an individual possessing a dominant allele
 
 """
 
+
+
+
+def dominantAlleleChance(k, m, n):
+    
+    #return (pair_count(k) + k*m + m*n*(1/2.0) )/pair_count(k+m+n)
+    return k/(k+m+n) + (m/(k+m+n)) * (k + (m-1) * 0.75 + n*0.5)/(k+m+n-1) + (n/(k+m+n)) * (k + m *0.5)/(k+m+n-1)
+
+fo = open("out.txt", 'w')
+    
+with open("rosalind_iprb.txt", 'r') as f:
+    data = f.read().strip().split()
+    k = float(data[0])
+    m = float(data[1])
+    n = float(data[2])
+    fo.write(str(dominantAlleleChance(k,m,n))) 
+    
+    
+fo.close()    
