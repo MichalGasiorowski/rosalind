@@ -29,24 +29,35 @@ all decimal answers unless otherwise stated; please see the note on absolute err
 
 #from collections import Counter
 
+def read_fasta(filename):
+    f = open(filename, 'r')
+    dna_strings = f.read().strip().split(">")[1:]
+    dna_ret = [ map(lambda x: x.replace("\n", ""), dna_s.split("\n", 1)) for dna_s in dna_strings]
+    return dna_ret
+
+
 def gc_content(s):
     s_strip = s.strip().replace("\n", "")
     return (s_strip.count("G") + s_strip.count("C") + 0.0)/len(s_strip)
     
 fo = open("out.txt", 'w')
 
-with open("rosalind_gc.txt", 'r') as f:
-    dna_strings = f.read().strip().split(">")
-    max_gc = 0
-    max_gc_name = ""
-    
-    for dna_s in dna_strings[1:]:
-        curr_gc_name, curr_gc_content = dna_s.split("\n", 1)
-        curr_gc = gc_content(curr_gc_content)
-        if curr_gc > max_gc:
-            max_gc = curr_gc
-            max_gc_name = curr_gc_name
-    fo.write(max_gc_name + "\n" + str(100*max_gc))
+#dd = read_fasta("rosalind_gc.txt")
+#print dd
+
+
+dna_strings = read_fasta("rosalind_gc.txt")   
+max_gc = 0
+max_gc_name = ""
+
+for dna_s in dna_strings:
+    curr_gc_name, curr_gc_content = dna_s
+    curr_gc = gc_content(curr_gc_content)
+    if curr_gc > max_gc:
+        max_gc = curr_gc
+        max_gc_name = curr_gc_name
+        
+fo.write(max_gc_name + "\n" + str(100*max_gc))
         
         
 fo.close()
