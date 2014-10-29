@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr 21 23:10:58 2014
 
 @author: Michal
 """

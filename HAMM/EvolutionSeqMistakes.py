@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 22 13:34:13 2014
 
 @author: MGasiorowski
 
